@@ -1,0 +1,42 @@
+{{ $.Scratch.Set "archived" false }}
+{{range .Site.Pages }}
+{{ if eq .Type "events" }}
+{{if eq .Title "Upcoming"}}
+{{else}}
+{{ if .Params.When }}
+{{$t := (time .Params.When) }}
+
+{{if $t.Before now}}
+{{ $.Scratch.Set "archived" true }}
+
+<div class="col-6 col-md-4 associationBox">
+    <div class="centerBox">
+        <div class="categoryWrapper" align="center">
+            <h1>{{.Title}} <br> <span
+                    class="subTitle">{{if .Params.Label }} {{.Params.Label}} {{else}}No Label {{end}}</span>
+                <br> <span class="subTitle">{{if .Params.When }} {{ dateFormat "02/01/2006" .Params.When }} {{else}}No Date {{end}}</span>
+            </h1>
+            <button>
+			                <span onclick="redirectToUrl('{{.Permalink}}')">
+				                <span onclick="redirectToUrl('{{.Permalink}}')">
+					                <a href="{{.Permalink}}" data-attr-span="Show event">
+						                Show event
+					                </a>
+				                </span>
+                            </span>
+            </button>
+        </div>
+    </div>
+</div>
+{{end}}
+{{end}}
+{{end}}
+{{end}}
+{{end}}
+
+
+{{ $resultArchived := $.Scratch.Get "archived" }}
+
+{{ if eq $resultArchived false }}
+<i>No archived events</i>
+{{ end }}

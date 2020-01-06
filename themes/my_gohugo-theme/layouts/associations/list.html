@@ -1,0 +1,30 @@
+{{ partial "header.html" . }}
+
+<div class="container">
+    <div class="row">
+
+{{ range .Data.Pages }}
+{{ if eq .Type "associations" }}
+            <div class="col-6 col-md-4 associationBox">
+                <div class="centerBox">
+                    <div class="categoryWrapper" align="center">
+                        <h1>{{.Title}} <br> <span class="subTitle">{{if .Params.Domain }} {{.Params.Domain}} {{else}}No domain {{end}}</span></h1>
+                        <button>
+			                <span onclick="redirectToUrl('{{.Permalink}}')">
+				                <span onclick="redirectToUrl('{{.Permalink}}')">
+					                <a href="{{.Permalink}}" data-attr-span="Show more">
+						                Show more
+					                </a>
+				                </span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+{{ end }}
+{{ end }}
+
+    </div>
+</div>
+
+{{ partial "footer.html" . }}

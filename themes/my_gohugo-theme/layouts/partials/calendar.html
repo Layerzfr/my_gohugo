@@ -1,0 +1,49 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.js" integrity="sha256-F4ovzqUMsKm41TQVQO+dWHQA+sshyOUdmnDcTPMIHkM=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.css" integrity="sha256-nJK+Jim06EmZazdCbGddx5ixnqfXA13Wlw3JizKK1GU=" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.js" integrity="sha256-I1bdnmA3OtkQwlbwNbJQ2y+kH2fIXfnIjhAfYhxJqiY=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.css" integrity="sha256-QG5qcyovbK2zsUkGMWTVn0PZM1P7RVx0Z05QwB9dCeg=" crossorigin="anonymous" />
+
+
+<div class="container">
+    <div id='calendar'></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/bootstrap/main.js"></script>
+
+<script>
+
+
+
+    var calendarEl = document.getElementById('calendar');
+
+
+    var events = [];
+    {{ range .Site.RegularPages }}
+    {{ if eq .Type "events"}}
+    {{ if eq .Title "Upcoming"}}
+    {{else}}
+    events.push({'label': '{{.Title}}', 'title': '{{.Title}}', 'start': '{{.Params.When}}', 'url': '{{.Permalink}}' });
+
+    {{end}}
+    {{end}}
+    {{end}}
+    $( "#myInput" ).autocomplete({
+        source: events,
+        select: function (event, ui) {
+            window.location.href = ui.item.value
+        }
+    });
+
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        themeSystem: 'bootstrap',
+        plugins: [ 'dayGrid', 'bootstrap' ],
+        events: events,
+        eventClick: function (info) {
+            console.log(info)
+        }
+    });
+
+    calendar.render();
+
+</script>

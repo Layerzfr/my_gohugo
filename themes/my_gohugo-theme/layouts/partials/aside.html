@@ -1,0 +1,20 @@
+<div class="col-12 col-md-3 col-xl-2 bd-sidebar sidebarCustom">
+    <div class="my-2 my-lg-0 topBox p-5">
+        <input class="form-control mr-sm-2 searchAll" type="search" placeholder="Search" aria-label="Search" id="myInput">
+        <p id="noResults" style="display: none;">No results found</p>
+    </div>
+    <div class="p-5 mt-4 border text-center">
+        <h3>Associations Spotlight:</h3>
+        <ul>
+            {{ range .Site.RegularPages }}
+            {{ if eq .Type "associations" }}
+            {{ if .Params.Important }}
+
+            <li><a href="{{.Permalink}}">{{.Title}}</a></li>
+
+            {{end}}
+            {{end}}
+            {{end}}
+        </ul>
+    </div>
+</div>

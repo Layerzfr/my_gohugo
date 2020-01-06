@@ -1,0 +1,47 @@
+{{ partial "header.html" . }}
+<div class="container">
+    <div class="text-center">
+        <h2 class="font-weight-bold">IMPORTANTS EVENTS</h2>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        {{ range first 10 .Data.Pages }}
+        {{ if eq .Type "events"}}
+        {{ if .Params.Important }}
+        {{ if .Params.When }}
+        {{$t := (time .Params.When) }}
+
+        {{if $t.After now}}
+        <div class="col-6 col-md-4 p-5 w-75 event text-center {{if .Params.draft}}{{else}} eventWithLink {{end}}">
+            {{ if .Params.Draft }}
+            <h2 class="font-weight-bold">{{ .Title }}</h2>
+            {{else}}
+            <h2 class="font-weight-bold"><a href="{{.Permalink}}">{{ .Title }}</a></h2>
+            {{end}}
+            <p><i>Label:</i> {{ .Params.Label }}</p>
+            <p><i>Date:</i> <b>{{ dateFormat "02/01/2006" .Params.When }}</b></p>
+            <div class="containerImg mx-auto">
+                {{ with .Params.Photos }}
+                {{ range first 1 . }}
+                <img src="{{.}}" class="img-thumbnail customImg">
+                {{ end }}
+                {{ end }}
+            </div>
+        </div>
+        {{end}}
+        {{end}}
+        {{ end }}
+        {{ end }}
+        {{ end }}
+    </div>
+</div>
+
+<script>
+    $('.eventWithLink').on('click' ,function () {
+        window.location.href = $(this).find("a").attr('href');
+    })
+</script>
+
+{{ partial "footer.html" . }}

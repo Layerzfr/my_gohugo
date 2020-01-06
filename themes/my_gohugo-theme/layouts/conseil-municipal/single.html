@@ -1,0 +1,18 @@
+{{ partial "header.html" . }}
+
+<div class="container-fluid text-align-center" align="center">
+    <h2 class="font-weight-bold">{{ .Params.Firstnames }} {{ .Params.Lastname | upper }} </h2>
+    <div>
+        <p><i>{{ .Params.Role }}</i></p>
+    </div>
+    <div>
+        <img class="img-thumbnail customImg" src="{{ .Params.Photo }}">
+    </div>
+    <div>
+        <h2 class="font-weight-bold mt-5">History:</h2>
+        <p>
+            {{.Content}}
+        </p>
+    </div>
+</div>
+{{ partial "footer.html" }}

@@ -1,0 +1,97 @@
+</div>
+</div>
+<footer class="page-footer font-small cyan darken-3">
+    <div class="text-center pt-4">
+        <h2 class="font-weight-bold"> Contact </h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 py-5">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.0756306489525!2d2.348879115674318!3d48.85676817928729!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1dee160761%3A0x7cc70b2b304c91ab!2sPlace%20de%20l&#39;H%C3%B4tel%20de%20Ville%2C%2075004%20Paris!5e0!3m2!1sfr!2sfr!4v1568967902555!5m2!1sfr!2sfr" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+            </div>
+            <div class="col-md-4 py-5">
+                <h3 class="font-weight-bold" align="center">Contact us</h3>
+<!--                <form action="https://formspree.io/baptiste1.dumont@epitech.eu" method="POST">-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="_replyto">Sender</label>-->
+<!--                        <input type="email" class="form-control" id="_replyto" aria-describedby="emailHelp" placeholder="Enter email" name="_reply" required>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="subject">Subject</label>-->
+<!--                        <input type="text" class="form-control" id="subject" aria-describedby="emailHelp" placeholder="Enter subject" name="_subject" required>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="content">Message</label>-->
+<!--                        <textarea class="form-control z-depth-1" id="content" rows="3" placeholder="Your message..." name="content" required></textarea>-->
+<!--                    </div>-->
+<!--                    <input type="submit" class="btn btn-primary" value="Submit">-->
+<!--                </form>-->
+
+                <a id="foxyform_embed_link_192345" href="http://fr.foxyform.com/">foxyform</a>
+                <script type="text/javascript">
+                    (function(d, t){
+                        var g = d.createElement(t),
+                            s = d.getElementsByTagName(t)[0];
+                        g.src = "http://fr.foxyform.com/js.php?id=192345&sec_hash=4883c0b15a0&width=350px";
+                        s.parentNode.insertBefore(g, s);
+                    }(document, "script"));
+                </script>
+
+                <div class="d-flew" align="center">
+                    <i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:+33144080075">01 44 08 00 75</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="footer-copyright text-center py-3">© 2019 Copyright:
+        <b>Baptiste DUMONT</b>
+    </div>
+</footer>
+
+<script>
+    $( function() {
+        $('#noResults').hide()
+        var availableTags = [];
+        {{ range .Site.RegularPages }}
+        {{ if eq .Type "conseil-municipal"}}
+        availableTags.push({'label': '{{.Params.Firstnames}} {{.Params.Lastname}}', 'value': '{{.Params.Firstnames}} {{.Params.Lastname}}', 'url': '{{.Permalink}}'});
+        {{else}}
+        {{if eq .Title "Upcoming"}}
+        {{else if eq .Title "Calendar"}}
+        {{else if eq .Title "Presentation"}}
+        {{else}}
+        availableTags.push({'label': '{{.Title}}', 'value': '{{.Title}}', 'url': '{{.Permalink}}'});
+        {{end}}
+        {{end}}
+
+        {{end}}
+        $('#myInput').on('keyup', function () {
+            if($(this).val() === ""){
+                $('#noResults').hide()
+            }
+        })
+        $( "#myInput" ).autocomplete({
+            source: availableTags,
+            select: function (event, ui) {
+                window.location.href = ui.item.url
+            },
+            response: function (event, ui) {
+                if (ui.content.length === 0) {
+                   $('#noResults').show()
+                } else {
+                    $('#noResults').hide()
+                }
+            }
+        });
+    } );
+</script>
+
+<script>
+    function redirectToUrl(url) {
+        window.location.href = url;
+    }
+</script>
+</body>
